@@ -644,6 +644,8 @@ size_t http_parser_execute (http_parser *parser,
                             const char *data,
                             size_t len)
 {
+  puts("Benjamin was here at the start of http_parser_execute");
+
   char c, ch;
   int8_t unhex_val;
   const char *p = data;
