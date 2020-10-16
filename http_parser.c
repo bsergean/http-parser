@@ -662,6 +662,7 @@ size_t http_parser_execute (http_parser *parser,
 
   /* We're in an error state. Don't bother doing anything. */
   if (HTTP_PARSER_ERRNO(parser) != HPE_OK) {
+    puts("Benjamin was here - we are in an error state");
     return 0;
   }
 
@@ -672,16 +673,19 @@ size_t http_parser_execute (http_parser *parser,
          * we got paused.
          */
         CALLBACK_NOTIFY_NOADVANCE(message_complete);
+        puts("CALLBACK_DATA_NOADVANCE");
         return 0;
 
       case s_dead:
       case s_start_req_or_res:
       case s_start_res:
       case s_start_req:
+        puts("s_start_req");
         return 0;
 
       default:
         SET_ERRNO(HPE_INVALID_EOF_STATE);
+        puts("Benjamin was here - we are in an invalid state");
         return 1;
     }
   }
