@@ -1867,11 +1867,13 @@ reexecute:
 
             default:
               SET_ERRNO(HPE_CB_headers_complete);
+              puts("Benjamin was here - error on settings_complete");
               RETURN(p - data); /* Error */
           }
         }
 
         if (HTTP_PARSER_ERRNO(parser) != HPE_OK) {
+          puts("Benjamin was here - error on settings_complete friend");
           RETURN(p - data);
         }
 
@@ -1893,6 +1895,7 @@ reexecute:
           /* Exit, the rest of the message is in a different protocol. */
           UPDATE_STATE(NEW_MESSAGE());
           CALLBACK_NOTIFY(message_complete);
+          puts("Benjamin was here - the rest is in a different protocol");
           RETURN((p - data) + 1);
         }
 
@@ -1914,6 +1917,7 @@ reexecute:
              * status code and then close the connection.
              */
             SET_ERRNO(HPE_INVALID_TRANSFER_ENCODING);
+            puts("Benjamin was here - invalid transfer encoding");
             RETURN(p - data); /* Error */
           } else {
             /* RFC 7230 3.3.3 */
@@ -1996,6 +2000,7 @@ reexecute:
         CALLBACK_NOTIFY(message_complete);
         if (parser->upgrade) {
           /* Exit, the rest of the message is in a different protocol. */
+          puts("Benjamin was here - the rest is in a different protocol (message_done)");
           RETURN((p - data) + 1);
         }
         break;
